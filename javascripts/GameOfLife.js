@@ -1,12 +1,24 @@
 gameOfLife={
     board:[[0,0,0,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,0,0,0]],
-    rowCount:5,
-    colCount:5,
+    rowCount:90,
+    colCount:90,
     initialize:function()
     {
-                this.printBoard();
-                oInstance=this;
-                this.interval_id = setInterval(function(){oInstance.loop()}, 100);
+        next = new Array(this.rowCount);
+        for (j=0;j<this.rowCount;j++)
+        { 
+            next[j]=new Array(this.colCount);  
+            for (k=0; k<this.colCount; k++)
+            { 
+                var state = Math.random();
+                state = (state> 0.8)? 1:0;
+                next[j][k] = state; 
+            }
+        }
+        this.board=next;
+        this.printBoard();
+        oInstance=this;
+        this.interval_id = setInterval(function(){oInstance.loop()}, 100);
     },
     getCanvasContext:function()
     {
